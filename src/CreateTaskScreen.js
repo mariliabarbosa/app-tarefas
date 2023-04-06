@@ -18,6 +18,7 @@ const CreateTaskScreen = ({navigation, route}) => {
             date: date
         }
         taskItems.push(task)
+        taskItems.sort((a, b) => new Date(...a.date.split('/').reverse()) - new Date(...b.date.split('/').reverse()));
     }
 
     return (

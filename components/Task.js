@@ -12,7 +12,6 @@ const Task = (props) => {
                     <Text style={styles.itemDate}>{props.date}</Text>
                 </View>  
             </View>
-            <View style ={styles.circular}></View>
         </View>
     )
 }
