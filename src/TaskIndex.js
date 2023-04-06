@@ -7,7 +7,7 @@ import Task from '../components/Task'
 import Button from '../components/Button'
 
 const TaskIndex = ({route, navigation}) => {
-    const taskItems = (route.params.taskItems ? route.params.taskItems : []);
+    const taskItems = (route.params ? route.params.taskItems : []);
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
