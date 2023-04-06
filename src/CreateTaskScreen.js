@@ -6,29 +6,30 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 
 const CreateTaskScreen = ({navigation, route}) => {
-    const [name, setName] = useState();
+    const [title, setTitle] = useState();
     const [description, setDescription] = useState();
     const [date, setDate] = useState();
-    const [taskItems, setTaskItems] = useState();
+    const taskItems = route.params.taskItems;
 
     const createTask = () => {
         const task = {
-            name: name,
+            title: title,
             description: description,
             date: date
         }
-        console.log(task)
+        taskItems.push(task)
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.createWrapper}>
                 <Text style={styles.sectionTitle}>Criar tarefa</Text>
-                <Input label="Nome" placeholder='Nome da tarefa' value={name} onChangeText={text => setName(text)}/>
+                <Input label="Nome" placeholder='Nome da tarefa' value={title} onChangeText={text => setTitle(text)}/>
                 <Input label="Descrição" placeholder='Descrição' multiline={true} value={description} onChangeText={text => setDescription(text)}/>
                 <Input label="Data de conclusão" placeholder='Data' value={date} onChangeText={text => setDate(text)}/>
                 <Button title="Criar tarefa" onPress={() => {
                     createTask()
+                    navigation.navigate('Index', {taskItems})
                 }}/>
             </View>   
         </View>

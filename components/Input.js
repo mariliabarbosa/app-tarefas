@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 10,
         fontSize: 15,
-        boxShadow: '0px 0px 5px 0px rgba(112,112,112,1)'
     },
     inputLabel:{
         fontWeight: 500,

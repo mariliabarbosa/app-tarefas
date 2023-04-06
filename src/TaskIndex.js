@@ -6,17 +6,20 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Task from '../components/Task'
 import Button from '../components/Button'
 
-const TaskIndex = ({navigation}) => {
-    const taskItems
+const TaskIndex = ({route, navigation}) => {
+    const taskItems = (route.params.taskItems ? route.params.taskItems : []);
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionTitle}>Tarefas</Text>
         <View style={styles.items}>
-          <Task title={'Task '} description={'teste'} date={'01/01/2023'}/>
-          <Task title={'Task 2'} description={'teste'} date={'01/01/2023'}/>
+          {
+            (taskItems.length) ? 
+              taskItems.map((item) => <Task title={item.title} description={item.description} date={item.date}/>)
+              : null
+          }
         </View>
-        <Button title="Adicionar nova tarefa" onPress={() => navigation.navigate('CreateTask')}/>   
+        <Button title="Adicionar nova tarefa" onPress={() => navigation.navigate('CreateTask', {taskItems})}/>   
       </View>
     </View>
   );
