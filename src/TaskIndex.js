@@ -1,13 +1,25 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 import Task from '../components/Task'
 import Button from '../components/Button'
 
 const TaskIndex = ({route, navigation}) => {
-    const taskItems = (route.params ? route.params.taskItems : []);
+  let [taskItems, setTaskItems] = useState([]);
+  
+  React.useEffect(() => {
+    if(route.params){
+      setTaskItems(route.params.taskItems)
+    }
+  }, [route.params])
+  
+  const completeTask = (index) => {
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
@@ -15,7 +27,13 @@ const TaskIndex = ({route, navigation}) => {
         <View style={styles.items}>
           {
             (taskItems.length) ? 
-              taskItems.map((item) => <Task title={item.title} description={item.description} date={item.date}/>)
+              taskItems.map((item, index) => {
+                return(
+                  <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+                    <Task title={item.title} description={item.description} date={item.date}/>
+                  </TouchableOpacity>
+                )
+              })
               : null
           }
         </View>
